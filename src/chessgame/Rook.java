@@ -11,6 +11,15 @@ public class Rook extends Piece {
         if(!super.isValidMove()) return false;
 //      validate unique movement from here
 
+        int currRow = super.position.getRow();
+        int currCol = super.position.getColumn();
+        int newRow  = newPosition.getRow();
+        int newCol  = newPosition.getColumn();
+
+        if(currCol != newCol || currRow != newRow) {
+            return false;
+        }
+
         return true;
     }
 
