@@ -20,9 +20,13 @@ public class Knight extends Piece {
       int finalRow = currentPosition.getRow() + rows[index];
       int finalColumn = currentPosition.getColumn() + cols[index];
       String availableMove = finalRow + String.valueOf(finalColumn);
-      this.availableMoves.add(availableMove);
+
+      if((currentPosition.getColumn() > 0 && currentPosition.getColumn() < 7) &&
+          (currentPosition.getRow() > 0 && currentPosition.getRow() < 7)) {
+        this.availableMoves.add(availableMove);
+      }
     }
-    availableMoves.add("e8");
+
     System.out.println(String.format("Possible moves for %d%d:\n",
         currentPosition.getRow(), currentPosition.getColumn()) + availableMoves);
   }
