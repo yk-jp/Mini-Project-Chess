@@ -1,32 +1,30 @@
 package chessgame;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 
 public class Knight extends Piece {
 
-  private List<String> availableMoves = new LinkedList<>();
+  private LinkedList<String> availableMoves = new LinkedList<>();
 
   public Knight(boolean isWhite, Position position) {
     super(isWhite, position);
   }
 
   @Override
-  public void getAvailableMoves(String boardPosition) {
+  public void getAvailableMoves(Position currentPosition) {
     int[] rows = {2, 2, -2, -2, 1, 1, -1, -1};
     int[] cols = {-1, 1, 1, -1, 2, -2, 2, -2};
 
-    String row = boardPosition.substring(boardPosition.length() / 2);
-    String column = boardPosition.substring(0, boardPosition.length() / 2);
-
     for (int index = 0; index <= 7; index++) {
-      int finalRow = Integer.parseInt(row) + rows[index];
-      int finalColumn = Integer.parseInt(column) + cols[index];
+      int finalRow = currentPosition.getRow() + rows[index];
+      int finalColumn = currentPosition.getColumn() + cols[index];
       String availableMove = finalRow + String.valueOf(finalColumn);
       this.availableMoves.add(availableMove);
     }
-    System.out.print("Possible moves for " + boardPosition + ":\n" + availableMoves);
+    availableMoves.add("e8");
+    System.out.println(String.format("Possible moves for %d%d:\n",
+        currentPosition.getRow(), currentPosition.getColumn()) + availableMoves);
   }
 
   @Override
@@ -38,11 +36,7 @@ public class Knight extends Piece {
   public boolean isValidMove(Position newPosition) {
     int baseXComparison = (super.position.getRow() - newPosition.getRow());
     int baseYComparison = (super.position.getColumn() - newPosition.getColumn());
-
-    if (Math.abs(baseXComparison * baseYComparison) == 2) {
-      return true;
-    }
-    return false;
+    return Math.abs(baseXComparison * baseYComparison) == 2;
   }
 
   @Override
