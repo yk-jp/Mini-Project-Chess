@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public abstract class Piece {
 
-    private boolean color;
+    private boolean isWhite;
 
-    public Piece (boolean color){
-        this.color = color;
-        setColor(color);
+    public Piece (boolean isWhite){
+        this.isWhite = isWhite;
+        setWhite(isWhite);
     }
 
     @Override
@@ -16,12 +16,12 @@ public abstract class Piece {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Piece piece = (Piece) o;
-        return color == piece.color;
+        return isWhite == piece.isWhite;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(color);
+        return Objects.hash(isWhite);
     }
 
 
@@ -31,11 +31,11 @@ public abstract class Piece {
     @Override
     public String toString() {
         return "Piece{" +
-                "color=" + color +
+                "color=" + isWhite +
                 '}';
     }
 
-    public void setColor(boolean color) {
-        this.color = color;
+    public void setWhite(boolean white) {
+        isWhite = white;
     }
 }
