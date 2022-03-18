@@ -4,10 +4,12 @@ import java.util.Objects;
 
 public abstract class Piece {
 
+    protected Position position;
     private boolean isWhite;
 
-    public Piece (boolean isWhite){
+    public Piece(boolean isWhite, Position position){
         this.isWhite = isWhite;
+        this.position = position;
     }
 
     @Override
@@ -24,7 +26,9 @@ public abstract class Piece {
     }
 
 
-    public void move (){}
+    public void move (Position position){
+      this.position = position;
+    }
 
 
     public abstract boolean isValidMove(Position position);
