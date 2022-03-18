@@ -26,7 +26,9 @@ public abstract class Piece {
     }
 
 
-    public void move (){}
+    public void move (Position position){
+      this.position = position;
+    }
 
 
     public abstract boolean isValidMove(Position position);
