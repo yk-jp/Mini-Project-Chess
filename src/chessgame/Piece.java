@@ -8,7 +8,6 @@ public abstract class Piece {
 
     public Piece (boolean isWhite){
         this.isWhite = isWhite;
-        setWhite(isWhite);
     }
 
     @Override
@@ -25,8 +24,12 @@ public abstract class Piece {
     }
 
 
-    public abstract void move ();
+    public void move (){}
 
+
+    public abstract boolean isValidMove(Position position);
+
+    public abstract void getAvailableMoves(String boardPosition);
 
     @Override
     public String toString() {

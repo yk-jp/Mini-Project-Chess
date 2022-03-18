@@ -39,7 +39,7 @@ public class King extends Piece{
         System.out.print("Possible moves for " + boardPosition + ":\n" + availableMoves);
     }
 
-    @Override
+
     public void move(Position position, Position newPosition) {
         // King movement is a 2D array where King is always in the 1,1 position
         // and the array moves across the board basically
@@ -53,8 +53,6 @@ public class King extends Piece{
             }
         }
     }
-
-
 
     @Override
     public String toString() {
