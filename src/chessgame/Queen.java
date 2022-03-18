@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Queen extends Piece {
 
-    public Queen(boolean isWhite) {
-        super(isWhite);
+    public Queen(boolean isWhite, Position newPosition) {
+        super(isWhite, newPosition);
     }
 
     @Override
@@ -98,11 +98,6 @@ public class Queen extends Piece {
         }
 
         return false;
-    }
-
-    @Override
-    public void move(Position position) {
-        super.setPosition(position);
     }
 
     @Override

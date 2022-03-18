@@ -6,8 +6,8 @@ import java.util.List;
 public class Rook extends Piece {
     private boolean isFirstMove;
 
-    public Rook(boolean isWhite) {
-        super(isWhite);
+    public Rook(boolean isWhite, Position newPosition) {
+        super(isWhite, newPosition);
         this.isFirstMove = false;
     }
 
@@ -49,11 +49,6 @@ public class Rook extends Piece {
         }
 
         return true;
-    }
-
-    @Override
-    public void move(Position position) {
-        super.setPosition(position);
     }
 
     @Override
