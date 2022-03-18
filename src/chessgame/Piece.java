@@ -4,10 +4,12 @@ import java.util.Objects;
 
 public abstract class Piece {
 
+    protected Position position;
     private boolean isWhite;
 
-    public Piece (boolean isWhite){
+    public Piece(boolean isWhite, Position position){
         this.isWhite = isWhite;
+        this.position = position;
     }
 
     @Override

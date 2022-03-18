@@ -49,7 +49,6 @@ public class King extends Piece{
         if (isValidMove(position)){
             // conditionals to establish the movement input from player
 
-            }
         }
     }
 
