@@ -1,69 +1,67 @@
 package chessgame;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Rook extends Piece {
-    private boolean isFirstMove;
 
-    public Rook(boolean isWhite, Position newPosition) {
-        super(isWhite, newPosition);
-        this.isFirstMove = false;
+  private boolean isFirstMove;
+
+  public Rook(boolean isWhite, Position position) {
+    super(isWhite, position);
+    this.isFirstMove = false;
+  }
+
+  public void setFirstMove(boolean firstMove) {
+    this.isFirstMove = firstMove;
+  }
+
+  public boolean getIsFirstMove() {
+    return isFirstMove;
+  }
+
+  @Override
+  public boolean isValidMovement(Position position) {
+    // TODO: update condition
+//    if (!super.isValidMove()) return false;
+
+    // validate unique movement from here
+    int currRow = super.position.getRow();
+    int currCol = super.position.getColumn();
+    int newRow = position.getRow();
+    int newCol = position.getColumn();
+
+    if (currCol != newCol || currRow != newRow) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public void showAvailableMovements(Position position) {
+    // all horizontal spot in the same row except for current position
+    for (int i = 0; i < this.MAX_EDGE; i++) {
+      String availableMove = i + String.valueOf(position.getRow());
+
+      // TODO: update condition
+//      if (boardPosition.equals(availableMove)) continue;
+      //      super.availableMovements.add(); //TODO: Add what here?
     }
 
-    @Override
-    public void getAvailableMoves(String boardPosition) {
-        String row = boardPosition.substring(boardPosition.length() / 2);
-        String col = boardPosition.substring(0, boardPosition.length() / 2);
+    // all vertical spot in the same column except for current position
+    for (int i = 0; i < this.MAX_EDGE; i++) {
+      String availableMove = i + String.valueOf(position.getColumn());
 
-//      all horizontal spot in the same row except for current position
-
-        for (int i = 0; i < this.MAX_EDGE; i++) {
-            String availableMove = i + row;
-            if (boardPosition.equals(availableMove)) continue;
-            availableMoves.add();
-        }
-
-//      all vertical spot in the same column except for current position
-        for (int i = 0; i < this.MAX_EDGE; i++) {
-            String availableMove = i + col;
-            if (boardPosition.equals(availableMove)) continue;
-            this.availableMoves.add();
-        }
-
-        System.out.print("Possible moves for " + boardPosition + ":\n" + availableMoves);
+      // TODO: update condition
+//      if (boardPosition.equals(availableMove)) continue;
+//      super.availableMovements.add(); //TODO: Add what here?
     }
+    System.out.println(String.format("Possible moves for %d%d:\n",
+        position.getRow(), position.getColumn()) + super.availableMovements);
+  }
 
-    @Override
-    public boolean isValidMove(Position newPosition) {
-        if (!super.isValidMove()) return false;
-//      validate unique movement from here
-
-        int currRow = super.position.getRow();
-        int currCol = super.position.getColumn();
-        int newRow = newPosition.getRow();
-        int newCol = newPosition.getColumn();
-
-        if (currCol != newCol || currRow != newRow) {
-            return false;
-        }
-
-        return true;
-    }
-
-    @Override
+  @Override
     public String toString() {
         return "Rook{" +
-                "isWhite=" + this.getIsWhite() +
-                ", position=" + this.getPosition() +
+                "isWhite=" + super.isWhite() +
+                ", position=" + super.position +
                 "}";
-    }
-
-    public void setFirstMove(boolean firstMove) {
-        isFirstMove = firstMove;
-    }
-
-    public boolean getIsFirstMove() {
-        return this.isFirstMove;
     }
 }

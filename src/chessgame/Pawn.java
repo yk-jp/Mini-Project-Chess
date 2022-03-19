@@ -1,9 +1,5 @@
 package chessgame;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
-
 public class Pawn extends Piece {
 
   public Pawn(boolean isWhite, Position position) {
@@ -11,19 +7,7 @@ public class Pawn extends Piece {
   }
 
   @Override
-  public void getAvailableMoves(String boardPosition) {
-    List<String> availableMoves = new LinkedList<>();
-
-    System.out.print("Possible moves for " + boardPosition + ":\n" + availableMoves);
-  }
-
-  @Override
-  public void move(Position position) {
-    super.setPosition(position);
-  }
-
-  @Override
-  public boolean isValidMove(Position position) {
+  public boolean isValidMovement(Position position) {
     int currentPositionRow = super.position.getRow();
     int currentPositionCol = super.position.getColumn();
 
@@ -36,23 +20,38 @@ public class Pawn extends Piece {
   }
 
   @Override
-  public String toString() {
-    return "Pawn{" +
-        "isWhite=" + super.isWhite() +
-        ", position=" + super.getPosition() +
-        '}';
+  public void showAvailableMovements(Position position) {
+    String availableMove;
+
+    if(super.position.getColumn() < 7 && super.position.getRow() < 7) {
+      availableMove =
+          (super.position.getRow() + 1) + String.valueOf(super.position.getColumn() + 1);
+      super.availableMovements.add(availableMove);
+    }
+
+    if(super.position.getColumn() > 0 && super.position.getRow() < 7) {
+      availableMove =
+          (super.position.getRow() + 1) + String.valueOf(super.position.getColumn() - 1);
+      super.availableMovements.add(availableMove);
+    }
+
+    if(super.position.getColumn()> 0 &&
+        super.position.getColumn() < 7 &&
+        super.position.getRow() < 7) {
+      availableMove =
+          (super.position.getRow() + 1) + String.valueOf(super.position.getColumn());
+      super.availableMovements.add(availableMove);
+    }
+
+    System.out.println(String.format("Possible moves for %d%d:\n",
+        position.getRow(), position.getColumn()) + super.availableMovements);
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
-    }
-    if (obj == null || getClass() != obj.getClass()) {
-      return false;
-    }
-    Pawn piece = (Pawn) obj;
-    return super.isWhite() == piece.isWhite() &&
-        Objects.equals(position, piece.position);
+  public String toString() {
+    return "Pawn{" +
+        "isWhite=" + super.isWhite() +
+        ", position=" + super.position +
+        '}';
   }
 }
