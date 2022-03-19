@@ -1,48 +1,66 @@
 package chessgame;
 
+import java.util.LinkedList;
 import java.util.Objects;
 
 public abstract class Piece {
 
-    protected Position position;
     private boolean isWhite;
+    protected LinkedList<String> availableMovements = new LinkedList<>();
+    protected final int MAX_EDGE = 8;
+    protected Position position;
 
-    public Piece(boolean isWhite, Position position){
-        this.isWhite = isWhite;
-        this.position = position;
+    public Piece(boolean isWhite, Position position) {
+        setWhite(isWhite);
+        setPosition(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Piece piece = (Piece) o;
-        return isWhite == piece.isWhite;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(isWhite);
-    }
-
-
-    public void move (Position position){
-      this.position = position;
-    }
-
-
-    public abstract boolean isValidMove(Position position);
-
-    public abstract void getAvailableMoves(String boardPosition);
-
-    @Override
-    public String toString() {
-        return "Piece{" +
-                "color=" + isWhite +
-                '}';
+    public boolean isWhite() {
+        return isWhite;
     }
 
     public void setWhite(boolean white) {
         isWhite = white;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public void move(Position position) {
+        setPosition(position);
+    }
+
+    public abstract boolean isValidMovement(Position position);
+
+    public abstract void showAvailableMovements(Position position);
+
+    @Override
+    public String toString() {
+        return "Piece{" +
+            "isWhite=" + isWhite +
+            ", position=" + position +
+            '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Piece piece = (Piece) o;
+        return isWhite == piece.isWhite && Objects.equals(position, piece.position);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isWhite, position);
     }
 }
