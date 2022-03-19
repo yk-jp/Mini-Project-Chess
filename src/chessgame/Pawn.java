@@ -38,11 +38,6 @@ public class Pawn extends Piece {
   }
 
   @Override
-  public void move(Position position) {
-    super.setPosition(position);
-  }
-
-  @Override
   public boolean isValidMove(Position newPosition) {
     int currentPositionRow = super.position.getRow();
     int currentPositionCol = super.position.getColumn();
@@ -54,7 +49,7 @@ public class Pawn extends Piece {
   @Override
   public String toString() {
     return "Pawn{" +
-        "isWhite=" + super.isWhite() +
+        "isWhite=" + super.getColor() +
         ", position=" + super.getPosition() +
         '}';
   }
@@ -68,7 +63,7 @@ public class Pawn extends Piece {
       return false;
     }
     Pawn piece = (Pawn) obj;
-    return super.isWhite() == piece.isWhite() &&
+    return super.getColor() == piece.getColor() &&
         Objects.equals(position, piece.position);
   }
 }

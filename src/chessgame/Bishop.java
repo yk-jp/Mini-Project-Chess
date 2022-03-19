@@ -13,14 +13,25 @@ public class Bishop extends Piece {
 
   @Override
   public void getAvailableMoves(Position currentPosition) {
-    availableMoves.add("e8");
+    for (int idx = 0; idx < 7; idx++) {
+      for (int jdx = idx; jdx < 7; jdx++) {
+        int finalRow = currentPosition.getRow() + idx;
+        int finalColumn = currentPosition.getColumn() + jdx;
+        String availableMove = finalRow + String.valueOf(finalColumn);
+
+        System.out.println("Current column: " + super.position.getColumn());
+        System.out.println("Final column: " + finalColumn);
+        System.out.println("Available move: " + availableMove);
+
+        this.availableMoves.add(availableMove);
+//        if(super.position.getColumn() - finalColumn == 1) {
+//          this.availableMoves.add(availableMove);
+//        }
+        System.out.println();
+      }
+    }
     System.out.println(String.format("Possible moves for %d%d:\n",
         currentPosition.getRow(), currentPosition.getColumn()) + availableMoves);
-  }
-
-  @Override
-  public void move(Position position) {
-    super.setPosition(position);
   }
 
   @Override
@@ -33,7 +44,7 @@ public class Bishop extends Piece {
   @Override
   public String toString() {
     return "Bishop{" +
-        "isWhite=" + super.isWhite() +
+        "isWhite=" + super.getColor() +
         ", position=" + super.getPosition() +
         '}';
   }
@@ -47,7 +58,7 @@ public class Bishop extends Piece {
       return false;
     }
     Bishop piece = (Bishop) obj;
-    return super.isWhite() == piece.isWhite() &&
+    return super.getColor() == piece.getColor() &&
         Objects.equals(position, piece.position);
   }
 }

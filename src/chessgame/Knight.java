@@ -32,11 +32,6 @@ public class Knight extends Piece {
   }
 
   @Override
-  public void move(Position position) {
-    super.setPosition(position);
-  }
-
-  @Override
   public boolean isValidMove(Position newPosition) {
     int baseXComparison = (super.position.getRow() - newPosition.getRow());
     int baseYComparison = (super.position.getColumn() - newPosition.getColumn());
@@ -46,7 +41,7 @@ public class Knight extends Piece {
   @Override
   public String toString() {
     return "Knight{" +
-        "isWhite=" + super.isWhite() +
+        "isWhite=" + super.getColor() +
         ", position=" + super.getPosition() +
         '}';
   }
@@ -60,7 +55,7 @@ public class Knight extends Piece {
       return false;
     }
     Knight piece = (Knight) obj;
-    return super.isWhite() == piece.isWhite() &&
+    return super.getColor() == piece.getColor() &&
         Objects.equals(position, piece.position);
   }
 }
