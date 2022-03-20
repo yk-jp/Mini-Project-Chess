@@ -212,7 +212,7 @@ public class Game {
 
   public static void displayResult(){
     if(isWhiteTime) System.out.println("Game over - 0-1 - Black won by resignation");
-    else System.out.println("Game over - 1-0 - 1-0 White won by resignation");
+    else System.out.println("Game over - 1-0 - White won by resignation");
   }
 
   public static void displayPossibleMovements(String userOption) {
@@ -227,6 +227,8 @@ public class Game {
 
     } catch(NullPointerException e) {
       System.out.println("There is no pieces in the position.");
+    } catch(ArrayIndexOutOfBoundsException e) {
+      System.out.println("The position is out of range, please try again");
     }
   }
 
