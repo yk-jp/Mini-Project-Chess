@@ -26,39 +26,47 @@ public class Game {
   private static Piece[][] populateGameBoard() {
     Piece[][] populatedGameBoard = new Piece[8][8];
 
+    // black
     String rookSymbol = "♜";
     String knightSymbol = "♞";
     String bishopSymbol = "♝";
     String kingSymbol = "♛";
     String queenSymbol = "♚";
     String pawnSymbol = "♟";
+    // white
+    String rookSymbolW = "♖";
+    String knightSymbolW = "♘";
+    String bishopSymbolW = "♗";
+    String kingSymbolW = "♕";
+    String queenSymbolW = "♔";
+    String pawnSymbolW = "♙";
 
     // Populate white side
     populatedGameBoard[0][0] =
-        new Rook(true, rookSymbol, new Position(0,0));
+        new Rook(true, rookSymbolW, new Position(0,0));
     populatedGameBoard[0][1] =
-        new Knight(true, knightSymbol, new Position(0, 1));
+        new Knight(true, knightSymbolW, new Position(0, 1));
     populatedGameBoard[0][2] =
-        new Bishop(true, bishopSymbol, new Position(0, 2));
+        new Bishop(true, bishopSymbolW, new Position(0, 2));
     populatedGameBoard[0][3] =
-        new King(true, kingSymbol, new Position(0, 3));
+        new King(true, kingSymbolW, new Position(0, 3));
     populatedGameBoard[0][4] =
-        new Queen(true, queenSymbol, new Position(0, 4));
+        new Queen(true, queenSymbolW, new Position(0, 4));
     populatedGameBoard[0][5] =
-        new Bishop(true, bishopSymbol, new Position(0, 5));
+        new Bishop(true, bishopSymbolW, new Position(0, 5));
     populatedGameBoard[0][6] =
-        new Knight(true, knightSymbol, new Position(0, 6));
+        new Knight(true, knightSymbolW, new Position(0, 6));
     populatedGameBoard[0][7] =
-        new Rook(true, pawnSymbol, new Position(0,7));
+        new Rook(true, pawnSymbolW, new Position(0,7));
 
-    populatedGameBoard[1][0] = new Pawn(true, pawnSymbol, new Position(1, 0));
-    populatedGameBoard[1][1] = new Pawn(true, pawnSymbol, new Position(1, 1));
-    populatedGameBoard[1][2] = new Pawn(true, pawnSymbol, new Position(1, 2));
-    populatedGameBoard[1][3] = new Pawn(true, pawnSymbol, new Position(1, 3));
-    populatedGameBoard[1][4] = new Pawn(true, pawnSymbol, new Position(1, 4));
-    populatedGameBoard[1][5] = new Pawn(true, pawnSymbol, new Position(1, 5));
-    populatedGameBoard[1][6] = new Pawn(true, pawnSymbol, new Position(1, 6));
-    populatedGameBoard[1][7] = new Pawn(true, pawnSymbol, new Position(1, 7));
+    populatedGameBoard[1][0] = new Pawn(true, pawnSymbolW, new Position(1, 0));
+    populatedGameBoard[1][1] = new Pawn(true, pawnSymbolW, new Position(1, 1));
+    populatedGameBoard[1][2] = new Pawn(true, pawnSymbolW, new Position(1, 2));
+    populatedGameBoard[1][3] = new Pawn(true, pawnSymbolW, new Position(1, 3));
+    populatedGameBoard[1][4] = new Pawn(true, pawnSymbolW, new Position(1, 4));
+    populatedGameBoard[1][5] = new Pawn(true, pawnSymbolW, new Position(1, 5));
+    populatedGameBoard[1][6] = new Pawn(true, pawnSymbolW, new Position(1, 6));
+    populatedGameBoard[1][7] = new Pawn(true, pawnSymbolW, new Position(1, 7));
 
     // Populate black side
     populatedGameBoard[7][0] =
@@ -228,16 +236,23 @@ public class Game {
 
         case "resign":
           // TODO: implement resign
+          displayBoardCurrentState();
+          displayResult();
           break;
 
         default:
-
           // TODO: implement here the logic for move piece
           break;
       }
       stillRunning = false;
     }
   }
+
+  public static void displayResult(){
+      if(isWhiteTime) System.out.println("Game over - 0-1 - Black won by resignation");
+      else System.out.println("Game over - 1-0 - 1-0 White won by resignation");
+  }
+
 
   public void board(){
     // 2D array for the board
