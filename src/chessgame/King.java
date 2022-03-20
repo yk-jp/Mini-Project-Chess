@@ -3,9 +3,11 @@ package chessgame;
 import java.util.List;
 
 public class King extends Piece{
+    private boolean isFirstMove;
 
     public King(boolean isWhite, String pieceSymbol, Position position) {
         super(isWhite, pieceSymbol, position);
+        this.isFirstMove = false;
     }
 
     @Override
@@ -41,5 +43,12 @@ public class King extends Piece{
             "isWhite=" + super.isWhite() +
             ", position=" + super.position +
             '}';
+    }
+
+    public void setFirstMove(boolean firstMove) {
+        isFirstMove = firstMove;
+    }
+    public boolean getIsFirstMove() {
+        return isFirstMove;
     }
 }

@@ -153,7 +153,7 @@ public class Game {
         if(board[idx][jdx] != null) {
           System.out.print(board[idx][jdx].getPieceSymbol() + " ");
         } else {
-          System.out.print("* ");
+          System.out.print("・ ");
         }
       }
       System.out.print(" " + idx);
@@ -210,6 +210,70 @@ public class Game {
     System.out.println(allAvailableMovements);
   }
 
+  public static void displayResult(){
+    if(isWhiteTime) System.out.println("Game over - 0-1 - Black won by resignation");
+    else System.out.println("Game over - 1-0 - 1-0 White won by resignation");
+  }
+
+  public static void displayPossibleMovements(String userOption) {
+    int row = Integer.parseInt(userOption.substring(0,1));
+    int column = Integer.parseInt(userOption.substring(1,2));
+
+    // Do we need to pass position instance? Position instance should have current position data
+    List<String> availableMovements = board[row][column].showAvailableMovements(new Position(row,column));
+
+    System.out.printf("Possible moves for %s: \n",userOption);
+    System.out.println(availableMovements.toString());
+  }
+
+  public static void movePieces(String userOption){
+  // [row,column]   5254 -> currPosition = [5,2], newPosition = [5,4]
+    int[] currPosition = {
+              Integer.parseInt(userOption.substring(0,1)),
+              Integer.parseInt(userOption.substring(1,2))
+    };
+
+    int[] newPosition = {
+            Integer.parseInt(userOption.substring(2,3)),
+            Integer.parseInt(userOption.substring(3,4))
+    };
+
+    Piece selectedPiece = board[currPosition[0]][currPosition[1]];
+
+    // validate position
+    if(!selectedPiece.isValidMovement(new Position(newPosition[0],newPosition[1]))){
+        System.out.println("Invalid position, Please try again");
+        return;
+    }
+
+    // special move
+    if(selectedPiece instanceof King && (((King) selectedPiece).getIsFirstMove())){
+
+
+      //validate special move for rook
+
+
+
+    } else if(selectedPiece instanceof Pawn && (((Pawn) selectedPiece).getIsFirstMove())) {
+      Pawn pawn = (Pawn) selectedPiece;
+
+      //validate special move for rook
+
+
+      // update position
+
+
+
+      pawn.setFirstMove(false);
+    }
+
+      /** tasks
+       *  checkmate
+       *  game ends
+       *  special move
+       */
+  }
+
   public static void play() {
     boolean stillRunning = true;
 
@@ -242,15 +306,18 @@ public class Game {
 
         default:
           // TODO: implement here the logic for move piece
-          break;
+          if(userOption.length() == 2) {
+            //square
+            displayPossibleMovements(userOption);
+          } else {
+            //UCI
+            movePieces(userOption);
+          }
+          continue;
       }
       stillRunning = false;
     }
   }
 
-  public static void displayResult(){
-      if(isWhiteTime) System.out.println("Game over - 0-1 - Black won by resignation");
-      else System.out.println("Game over - 1-0 - 1-0 White won by resignation");
-  }
 
 }
