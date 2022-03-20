@@ -1,9 +1,11 @@
 package chessgame;
 
+import java.util.List;
+
 public class King extends Piece{
 
-    public King(boolean isWhite, Position position) {
-        super(isWhite, position);
+    public King(boolean isWhite, String pieceSymbol, Position position) {
+        super(isWhite, pieceSymbol, position);
     }
 
     @Override
@@ -21,7 +23,7 @@ public class King extends Piece{
     }
 
     @Override
-    public void showAvailableMovements(Position position) {
+    public List<String> showAvailableMovements(Position position) {
         // 2d array for king's full range of movement
         Integer [][] availableMovesKing = {{0,1,2},{0,1,2},{0,1,2}};
         for (int i = 0; i < 2; i ++){
@@ -30,8 +32,7 @@ public class King extends Piece{
                 super.availableMovements.add(availableMove);
             }
         }
-        System.out.println(String.format("Possible moves for %d%d:\n",
-            position.getRow(), position.getColumn()) + super.availableMovements);
+        return super.availableMovements;
     }
 
     @Override

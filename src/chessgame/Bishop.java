@@ -1,9 +1,11 @@
 package chessgame;
 
+import java.util.List;
+
 public class Bishop extends Piece {
 
-  public Bishop(boolean isWhite, Position position) {
-    super(isWhite, position);
+  public Bishop(boolean isWhite, String pieceSymbol, Position position) {
+    super(isWhite, pieceSymbol, position);
   }
 
   @Override
@@ -14,7 +16,7 @@ public class Bishop extends Piece {
   }
 
   @Override
-  public void showAvailableMovements(Position position) {
+  public List<String> showAvailableMovements(Position position) {
     for (int idx = 0; idx < 7; idx++) {
       for (int jdx = 0; jdx < 7; jdx++) {
         int finalRowRight = position.getRow() + idx;
@@ -42,8 +44,7 @@ public class Bishop extends Piece {
 //        System.out.println();
       }
     }
-    System.out.println(String.format("Possible moves for %d%d:\n",
-        position.getRow(), position.getColumn()) + super.availableMovements);
+    return super.availableMovements;
   }
 
   @Override

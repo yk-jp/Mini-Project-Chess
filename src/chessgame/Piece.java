@@ -1,17 +1,20 @@
 package chessgame;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Piece {
 
     private boolean isWhite;
+    private String pieceSymbol;
     protected LinkedList<String> availableMovements = new LinkedList<>();
     protected final int MAX_EDGE = 8;
     protected Position position;
 
-    public Piece(boolean isWhite, Position position) {
+    public Piece(boolean isWhite, String pieceSymbol, Position position) {
         setWhite(isWhite);
+        setPieceSymbol(pieceSymbol);
         setPosition(position);
     }
 
@@ -21,6 +24,14 @@ public abstract class Piece {
 
     public void setWhite(boolean white) {
         isWhite = white;
+    }
+
+    public String getPieceSymbol() {
+        return pieceSymbol;
+    }
+
+    public void setPieceSymbol(String pieceSymbol) {
+        this.pieceSymbol = pieceSymbol;
     }
 
     public Position getPosition() {
@@ -45,7 +56,7 @@ public abstract class Piece {
         }
     }
 
-    public abstract void showAvailableMovements(Position position);
+    public abstract List<String> showAvailableMovements(Position position);
 
     @Override
     public String toString() {
