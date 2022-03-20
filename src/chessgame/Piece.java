@@ -36,11 +36,10 @@ public abstract class Piece {
     }
 
     public boolean isValidMovement(Position position) {
-        if(position.getRow()>0 && position.getColumn()>0
-                && position.getRow()<8 && position.getColumn()<8){
+        if (position.getRow() > 0 && position.getColumn() > 0
+                && position.getRow() < 8 && position.getColumn() < 8) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -50,9 +49,9 @@ public abstract class Piece {
     @Override
     public String toString() {
         return "Piece{" +
-            "isWhite=" + isWhite +
-            ", position=" + position +
-            '}';
+                "isWhite=" + isWhite +
+                ", position=" + position +
+                '}';
     }
 
     @Override
