@@ -4,8 +4,8 @@ public class Rook extends Piece {
 
     private boolean isFirstMove;
 
-    public Rook(boolean isWhite, Position position) {
-        super(isWhite, position);
+    public Rook(boolean isWhite, Position position, String shape) {
+        super(isWhite, position, shape);
         this.isFirstMove = false;
     }
 

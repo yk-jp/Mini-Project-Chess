@@ -9,15 +9,22 @@ public abstract class Piece {
     protected LinkedList<String> availableMovements = new LinkedList<>();
     protected final int MAX_EDGE = 8;
     protected Position position;
+    protected String shape;
 
-    public Piece(boolean isWhite, Position position) {
+    public Piece(boolean isWhite, Position position, String shape) {
         setWhite(isWhite);
         setPosition(position);
+        setShape(shape);
     }
 
     public boolean isWhite() {
         return isWhite;
     }
+
+    public void setShape(String shape){
+        this.shape = shape;
+    }
+
 
     public void setWhite(boolean white) {
         isWhite = white;

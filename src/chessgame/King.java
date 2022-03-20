@@ -2,8 +2,8 @@ package chessgame;
 
 public class King extends Piece{
 
-    public King(boolean isWhite, Position position) {
-        super(isWhite, position);
+    public King(boolean isWhite, Position position, String shape) {
+        super(isWhite, position, shape);
     }
 
     @Override

@@ -27,20 +27,55 @@ public class Game {
 
     public Game() {
         System.out.println("Starting gaming...\n");
-        this.board = Game.populateGameBoard();
+        this.board = Game.board();
         this.isWhiteTurn = true;
     }
 
-    public static Piece[][] populateGameBoard() {
-        Piece[][] populatedGameBoard = new Piece[8][8];
+    public static Piece[][] board(){
+        // 2D array for the board
+//        String [][] board = new String[8][8];
+        Piece [][] board = new Piece[8][8];
+        // Black Pieces
+        String rookB = "♜";
+        String knightB = "♞";
+        String bishopB = "♝";
+        String kingB = "♛";
+        String queenB = "♚";
+        board[0][0] = new Rook(false,new Position(0,0),rookB);
+        board[0][1] = new Knight(false,new Position(0,1),knightB);
+        board[0][2] = new Bishop(false, new Position(0,2),bishopB);
+        board[0][3] = new King(false, new Position(0,3),kingB);
+        board[0][4] = new Queen(false, new Position(0,4),queenB);
+        board[0][5] = new Bishop(false, new Position(0,5),bishopB);
+        board[0][6] =new Knight(false, new Position(0,6),knightB);
+        board[0][7] =  new Rook(false,new Position(0,7),rookB);
 
-        for(int idx = 0; idx < 7; idx++) {
-            for(int jdx = 0; jdx < 7; jdx++) {
+        for (int i = 0; i < 8; i++){
+            String pawnB = "♟";
+            String pawnW = "♙";
 
-            }
+            board[1][i] = new Pawn(false,new Position(1,i),pawnB);
+            board[6][i] =new Pawn(true,new Position(6,i),pawnW);
         }
-    }
 
+
+        String rookW = "♖";
+        String knightW = "♘";
+        String bishopW = "♗";
+        String kingW = "♕";
+        String queenW = "♔";
+
+        board[7][0] = new Rook(false,new Position(7,0),rookW);
+        board[7][1] = new Knight(false,new Position(7,1),knightW);
+        board[7][2] = new Bishop(false, new Position(7,2),bishopW);
+        board[7][3] = new King(false, new Position(7,3),kingW);
+        board[7][4] = new Queen(false, new Position(7,4),queenW);
+        board[7][5] = new Bishop(false, new Position(7,5),bishopW);
+        board[7][6] =new Knight(false, new Position(7,6),knightW);
+        board[7][7] =  new Rook(false,new Position(7,7),rookW);
+
+        return board;
+    }
 
     /**
      * conditions to end this game.
@@ -109,13 +144,6 @@ public class Game {
 //
 //        String userInput = this.baseUserInput();
 //        // conditional
-
-
-    public Game() {
-        System.out.println("Starting gaming...\n");
-        this.board = new Piece[8][8];
-        this.isWhiteTurn = true;
-    }
 
     /**
      * conditions to end this game.
