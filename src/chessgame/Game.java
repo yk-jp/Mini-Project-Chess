@@ -220,7 +220,6 @@ public class Game {
     int column = Integer.parseInt(userOption.substring(1,2));
 
     try {
-      // Do we need to pass position instance? Position instance should have current position data
       List<String> availableMovements = board[row][column].showAvailableMovements(new Position(row,column));
 
       System.out.printf("Possible moves for %s: \n",userOption);
@@ -231,6 +230,11 @@ public class Game {
     }
   }
 
+  /** tasks
+   *  checkmate
+   *  game ends
+   *  special move
+   */
   public static void movePieces(String userOption){
   // [row,column]   5254 -> currPosition = [5,2], newPosition = [5,4]
     int[] currPosition = {
@@ -254,29 +258,40 @@ public class Game {
     // special move
     if(selectedPiece instanceof King && (((King) selectedPiece).getIsFirstMove())){
 
+      //validate special move for king
+//      if(isCastlingValid()) {
+//
+//      }
 
-      //validate special move for rook
-
-
-
+      //
+      return;
     } else if(selectedPiece instanceof Pawn && (((Pawn) selectedPiece).getIsFirstMove())) {
       Pawn pawn = (Pawn) selectedPiece;
 
-      //validate special move for rook
-
+      //validate special move for pawn
 
       // update position
 
-
-
       pawn.setFirstMove(false);
+      return;
     }
 
-      /** tasks
-       *  checkmate
-       *  game ends
-       *  special move
-       */
+    // normal movement
+    if(selectedPiece.isValidMovement(new Position(newPosition[0],newPosition[1]))){
+      // when there's no piece in the new position
+      if(board[newPosition[0]][newPosition[1]] == null) {
+        //validate positions where the piece is moving from current position to new position
+
+        // check if king get captured when piece is moved to new position
+
+        //update position
+        selectedPiece.setPosition(new Position(newPosition[0], newPosition[1]));
+
+        //swap element with each other.
+        board[newPosition[0]][newPosition[1]] = selectedPiece;
+        board[currPosition[0]][currPosition[1]] = null;
+      }
+    }
   }
 
   public static void play() {
@@ -314,15 +329,15 @@ public class Game {
           if(userOption.length() == 2) {
             //square
             displayPossibleMovements(userOption);
-          } else {
+          } else if(userOption.length() == 4) {
             //UCI
             movePieces(userOption);
+          } else {
+            System.out.println("Invalid input. Please try again");
           }
           continue;
       }
       stillRunning = false;
     }
   }
-
-
 }
