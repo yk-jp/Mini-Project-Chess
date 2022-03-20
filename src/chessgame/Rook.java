@@ -20,7 +20,7 @@ public class Rook extends Piece {
   @Override
   public boolean isValidMovement(Position position) {
     // TODO: update condition
-//    if (!super.isValidMove()) return false;
+    if (!super.isValidMovement(position)) return false;
 
     // validate unique movement from here
     int currRow = super.position.getRow();
@@ -41,8 +41,8 @@ public class Rook extends Piece {
       String availableMove = i + String.valueOf(position.getRow());
 
       // TODO: update condition
-//      if (boardPosition.equals(availableMove)) continue;
-      //      super.availableMovements.add(); //TODO: Add what here?
+      if (position.equals(availableMove)) continue;
+            super.availableMovements.add(availableMove);
     }
 
     // all vertical spot in the same column except for current position
@@ -50,8 +50,8 @@ public class Rook extends Piece {
       String availableMove = i + String.valueOf(position.getColumn());
 
       // TODO: update condition
-//      if (boardPosition.equals(availableMove)) continue;
-//      super.availableMovements.add(); //TODO: Add what here?
+      if (position.equals(availableMove)) continue;
+      super.availableMovements.add(availableMove);
     }
     System.out.println(String.format("Possible moves for %d%d:\n",
         position.getRow(), position.getColumn()) + super.availableMovements);

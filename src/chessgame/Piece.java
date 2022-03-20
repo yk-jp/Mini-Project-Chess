@@ -35,7 +35,15 @@ public abstract class Piece {
         setPosition(position);
     }
 
-    public abstract boolean isValidMovement(Position position);
+    public boolean isValidMovement(Position position) {
+        if(position.getRow()>0 && position.getColumn()>0
+                && position.getRow()<8 && position.getColumn()<8){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
     public abstract void showAvailableMovements(Position position);
 

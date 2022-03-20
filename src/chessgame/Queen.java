@@ -10,7 +10,7 @@ public class Queen extends Piece {
     public boolean isValidMovement(Position position) {
 
         // TODO: update condition
-//    if (!super.isValidMovement()) return false;
+        if (!super.isValidMovement(position)) return false;
 
         // validate unique movement from here
         int currRow = super.position.getRow();
@@ -39,8 +39,8 @@ public class Queen extends Piece {
             String availableMove = i + String.valueOf(position.getRow());
 
             // TODO: update condition
-            // if (boardPosition.equals(availableMove)) continue;
-//      super.availableMovements.add(); //TODO: Add what here?
+            if (position.equals(availableMove)) continue;
+            super.availableMovements.add(availableMove);
         }
 
         // all vertical spot in the same column except for current position
@@ -48,15 +48,15 @@ public class Queen extends Piece {
             String availableMove = i + String.valueOf(position.getColumn());
 
             // TODO: update condition
-//      if (boardPosition.equals(availableMove)) continue;
-//      super.availableMovements.add(); //TODO: Add what here?
+            if (position.equals(availableMove)) continue;
+            super.availableMovements.add(availableMove);
         }
 
         int rowNum = position.getRow();
         int colNum = position.getColumn();
 
         // all right diagonal spot except for current position
-        while(rowNum < this.MAX_EDGE && colNum < this.MAX_EDGE) {
+        while (rowNum < this.MAX_EDGE && colNum < this.MAX_EDGE) {
             rowNum++;
             colNum++;
 
@@ -66,7 +66,7 @@ public class Queen extends Piece {
 
         rowNum = position.getRow();
         colNum = position.getColumn();
-        while(rowNum > 0 && colNum > 0) {
+        while (rowNum > 0 && colNum > 0) {
             rowNum--;
             colNum--;
 
@@ -77,7 +77,7 @@ public class Queen extends Piece {
         // all left diagonal spot except for current position
         rowNum = position.getRow();
         colNum = position.getColumn();
-        while(rowNum > 0 && colNum < this.MAX_EDGE) {
+        while (rowNum > 0 && colNum < this.MAX_EDGE) {
             rowNum--;
             colNum++;
 
@@ -87,7 +87,7 @@ public class Queen extends Piece {
 
         rowNum = position.getRow();
         colNum = position.getColumn();
-        while(rowNum < this.MAX_EDGE  && colNum > 0) {
+        while (rowNum < this.MAX_EDGE && colNum > 0) {
             rowNum++;
             colNum--;
 
@@ -96,14 +96,14 @@ public class Queen extends Piece {
         }
 
         System.out.println(String.format("Possible moves for %d%d:\n",
-            position.getRow(), position.getColumn()) + super.availableMovements);
+                position.getRow(), position.getColumn()) + super.availableMovements);
     }
 
     @Override
     public String toString() {
         return "Queen{" +
-            "isWhite=" + super.isWhite() +
-            ", position=" + super.position +
-            "}";
+                "isWhite=" + super.isWhite() +
+                ", position=" + super.position +
+                "}";
     }
 }
