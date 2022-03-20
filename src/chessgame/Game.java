@@ -231,6 +231,8 @@ public class Game {
           break;
 
         default:
+
+          // TODO: implement here the logic for move piece
           break;
       }
       stillRunning = false;
