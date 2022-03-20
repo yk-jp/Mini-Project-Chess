@@ -37,9 +37,11 @@ public class Queen extends Piece {
     public List<String> showAvailableMovements(Position position) {
         // all horizontal spot in the same row except for current position
         for (int i = 0; i < this.MAX_EDGE; i++) {
-            String availableMove = i + String.valueOf(position.getRow());
+            String availableMove = String.valueOf(position.getRow()) + i;
 
             if (position.equals(availableMove)) continue;
+            if(super.isSamePosition(new Position(position.getRow(),i))) continue;
+
             super.availableMovements.add(availableMove);
         }
 
@@ -48,50 +50,52 @@ public class Queen extends Piece {
             String availableMove = i + String.valueOf(position.getColumn());
 
             if (position.equals(availableMove)) continue;
+            if(super.isSamePosition(new Position(i,position.getColumn()))) continue;
+
             super.availableMovements.add(availableMove);
         }
 
-        int rowNum = position.getRow();
-        int colNum = position.getColumn();
+        int rowNum = position.getRow() + 1;
+        int colNum = position.getColumn() + 1;
 
         // all right diagonal spot except for current position
         while (rowNum < this.MAX_EDGE && colNum < this.MAX_EDGE) {
+
+            String availableMove = rowNum + String.valueOf(colNum);
+            super.availableMovements.add(availableMove);
             rowNum++;
             colNum++;
-
-            String availableMove = rowNum + String.valueOf(colNum);
-            super.availableMovements.add(availableMove);
         }
 
-        rowNum = position.getRow();
-        colNum = position.getColumn();
-        while (rowNum > 0 && colNum > 0) {
-            rowNum--;
-            colNum--;
+        rowNum = position.getRow()-1;
+        colNum = position.getColumn()-1;
+        while (rowNum >= 0 && colNum >= 0) {
 
             String availableMove = rowNum + String.valueOf(colNum);
             super.availableMovements.add(availableMove);
+            rowNum--;
+            colNum--;
         }
 
         // all left diagonal spot except for current position
-        rowNum = position.getRow();
-        colNum = position.getColumn();
-        while (rowNum > 0 && colNum < this.MAX_EDGE) {
+        rowNum = position.getRow() -1;
+        colNum = position.getColumn() + 1;
+        while (rowNum >= 0 && colNum < this.MAX_EDGE) {
+
+            String availableMove = rowNum + String.valueOf(colNum);
+            super.availableMovements.add(availableMove);
             rowNum--;
             colNum++;
-
-            String availableMove = rowNum + String.valueOf(colNum);
-            super.availableMovements.add(availableMove);
         }
 
-        rowNum = position.getRow();
-        colNum = position.getColumn();
-        while (rowNum < this.MAX_EDGE && colNum > 0) {
-            rowNum++;
-            colNum--;
+        rowNum = position.getRow() + 1;
+        colNum = position.getColumn() - 1;
+        while (rowNum < this.MAX_EDGE && colNum >= 0) {
 
             String availableMove = rowNum + String.valueOf(colNum);
             super.availableMovements.add(availableMove);
+            rowNum++;
+            colNum--;
         }
         return super.availableMovements;
     }

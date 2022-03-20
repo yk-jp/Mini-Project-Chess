@@ -57,7 +57,7 @@ public class Game {
     populatedGameBoard[0][6] =
         new Knight(true, knightSymbolW, new Position(0, 6));
     populatedGameBoard[0][7] =
-        new Rook(true, pawnSymbolW, new Position(0,7));
+        new Rook(true, rookSymbolW, new Position(0,7));
 
     populatedGameBoard[1][0] = new Pawn(true, pawnSymbolW, new Position(1, 0));
     populatedGameBoard[1][1] = new Pawn(true, pawnSymbolW, new Position(1, 1));
@@ -219,11 +219,16 @@ public class Game {
     int row = Integer.parseInt(userOption.substring(0,1));
     int column = Integer.parseInt(userOption.substring(1,2));
 
-    // Do we need to pass position instance? Position instance should have current position data
-    List<String> availableMovements = board[row][column].showAvailableMovements(new Position(row,column));
+    try {
+      // Do we need to pass position instance? Position instance should have current position data
+      List<String> availableMovements = board[row][column].showAvailableMovements(new Position(row,column));
 
-    System.out.printf("Possible moves for %s: \n",userOption);
-    System.out.println(availableMovements.toString());
+      System.out.printf("Possible moves for %s: \n",userOption);
+      System.out.println(availableMovements.toString());
+
+    } catch(NullPointerException e) {
+      System.out.println("There is no pieces in the position.");
+    }
   }
 
   public static void movePieces(String userOption){

@@ -39,10 +39,12 @@ public class Rook extends Piece {
   public List<String> showAvailableMovements(Position position) {
     // all horizontal spot in the same row except for current position
     for (int i = 0; i < this.MAX_EDGE; i++) {
-      String availableMove = i + String.valueOf(position.getRow());
+      String availableMove = String.valueOf(position.getRow()) + i;
 
       if (position.equals(availableMove)) continue;
-            super.availableMovements.add(availableMove);
+      if(super.isSamePosition(new Position(position.getRow(),i))) continue;
+
+      super.availableMovements.add(availableMove);
     }
 
     // all vertical spot in the same column except for current position
@@ -50,6 +52,8 @@ public class Rook extends Piece {
       String availableMove = i + String.valueOf(position.getColumn());
 
       if (position.equals(availableMove)) continue;
+      if(super.isSamePosition(new Position(i,position.getColumn()))) continue;
+
       super.availableMovements.add(availableMove);
     }
     return super.availableMovements;
