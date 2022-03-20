@@ -56,6 +56,10 @@ public abstract class Piece {
         }
     }
 
+    public boolean isSamePosition(Position position){
+        return getPosition().getRow() == position.getRow() && getPosition().getColumn() == position.getColumn();
+    }
+
     public abstract List<String> showAvailableMovements(Position position);
 
     @Override
