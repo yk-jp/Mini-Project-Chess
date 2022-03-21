@@ -204,6 +204,28 @@ public class Game {
     System.out.println(allAvailableMovements);
   }
 
+  public static void displayResult(){
+    if(isWhiteTime) System.out.println("Game over - 0-1 - Black won by resignation");
+    else System.out.println("Game over - 1-0 - White won by resignation");
+  }
+
+  public static void displayPossibleMovements(String userOption) {
+    int row = Integer.parseInt(userOption.substring(0,1));
+    int column = Integer.parseInt(userOption.substring(1,2));
+
+    try {
+      List<String> availableMovements = board[row][column].showAvailableMovements(new Position(row,column));
+
+      System.out.printf("Possible moves for %s: \n",userOption);
+      System.out.println(availableMovements.toString());
+
+    } catch(NullPointerException e) {
+      System.out.println("There is no pieces in the position.");
+    } catch(ArrayIndexOutOfBoundsException e) {
+      System.out.println("The position is out of range, please try again");
+    }
+  }
+
   public static void play() {
     boolean stillRunning = true;
 
@@ -229,10 +251,9 @@ public class Game {
           continue;
 
         case "resign":
-          if(isWhiteTime) {
-            System.out.println("Game over - 0-1 - Black won by resignation");
-          }
-          System.out.println("Game over - 0-1 - White won by resignation");
+          displayBoardCurrentState();
+          displayResult();
+          stillRunning = false;
           break;
 
         default:
@@ -263,6 +284,8 @@ public class Game {
               board[basePieceRow][basePieceColumn] = null;
               System.out.println("OK");
               isWhiteTime = !isWhiteTime;
+
+              // implement win here
             } else {
               System.err.println("Invalid movement, please try again");
             }
