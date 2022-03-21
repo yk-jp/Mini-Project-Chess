@@ -29,10 +29,10 @@ public class Rook extends Piece {
     int newRow = position.getRow();
     int newCol = position.getColumn();
 
-    if (currCol != newCol || currRow != newRow) {
-      return false;
+    if (currCol == newCol || currRow == newRow) {
+      return true;
     }
-    return true;
+    return false;
   }
 
   @Override
