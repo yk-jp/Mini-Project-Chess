@@ -18,10 +18,10 @@ public class Queen extends Piece {
         int currCol = super.position.getColumn();
         int newRow = position.getRow();
         int newCol = position.getColumn();
-
-        // vertical or horizontal move
-        if (currCol == newCol && currRow == newRow) {
-            return false;
+//
+//        // vertical or horizontal move
+        if (currCol == newCol || currRow == newRow) {
+            return true;
         }
 
         int offsetRow = newRow - currRow;
