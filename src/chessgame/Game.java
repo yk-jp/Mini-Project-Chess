@@ -262,7 +262,7 @@ public class Game {
               board[targetPieceRow][targetPieceColumn] = basePiece;
               board[basePieceRow][basePieceColumn] = null;
               System.out.println("OK");
-              isWhiteTime = false;
+              isWhiteTime = !isWhiteTime;
             } else {
               System.err.println("Invalid movement, please try again");
             }
