@@ -129,13 +129,15 @@ public class Game {
 
   private static boolean isSquareOrUci(String userInputOption) {
     boolean isSquareOrUci = true;
+    int countChars = 0;
 
     for(Character userInputByChar : userInputOption.toCharArray()) {
       if(Character.isLetter(userInputByChar)) {
         isSquareOrUci = false;
+        countChars += 1;
       }
     }
-    return isSquareOrUci;
+    return isSquareOrUci && (countChars % 2 == 0);
   }
 
   private static void displayBoardCurrentState() {
@@ -210,7 +212,7 @@ public class Game {
       String userOption = manageMenuOptions(isWhiteTime);
 
       switch (userOption) {
-        case "help": // Done
+        case "help":
           System.out.println("* type 'help' for help");
           System.out.println("* type 'board' to see the board again");
           System.out.println("* type 'resign' to resign");
@@ -219,23 +221,54 @@ public class Game {
           System.out.println("* type UCI (e.g. b1c3, e7e8) to make a move");
           continue;
 
-        case "board": // Done
+        case "board":
           continue;
 
-        case "moves": // Done
+        case "moves":
           displayAllPossibleMoves(isWhiteTime);
           continue;
 
         case "resign":
-          // TODO: implement resign
+          if(isWhiteTime) {
+            System.out.println("Game over - 0-1 - Black won by resignation");
+          }
+          System.out.println("Game over - 0-1 - White won by resignation");
           break;
 
         default:
+          if (userOption.length() <= 2) {
+            int requestedRow = Integer.parseInt(userOption.substring(0, userOption.length() / 2));
+            int requestedColumn = Integer.parseInt(userOption.substring(userOption.length() / 2));
+            Piece pieceInSquare = board[requestedRow][requestedColumn];
 
-          // TODO: implement here the logic for move piece
-          break;
+            System.out.println("Possible moves for " + userOption + ":");
+            System.out.println(pieceInSquare.showAvailableMovements(pieceInSquare.position));
+          } else {
+            String basePieceSquare = userOption.substring(0, userOption.length() / 2);
+            int basePieceRow =
+                Integer.parseInt(basePieceSquare.substring(0, basePieceSquare.length() / 2));
+            int basePieceColumn =
+                Integer.parseInt(basePieceSquare.substring(basePieceSquare.length() / 2));
+            Piece basePiece = board[basePieceRow][basePieceColumn];
+
+            String targetPieceSquare = userOption.substring(userOption.length() / 2);
+            int targetPieceRow =
+                Integer.parseInt(targetPieceSquare.substring(0, targetPieceSquare.length() / 2));
+            int targetPieceColumn =
+                Integer.parseInt(targetPieceSquare.substring(targetPieceSquare.length() / 2));
+
+            if(basePiece.isValidMovement(new Position(targetPieceRow, targetPieceColumn))) {
+              basePiece.move(new Position(targetPieceRow, targetPieceColumn));
+              board[targetPieceRow][targetPieceColumn] = basePiece;
+              System.out.println("OK");
+              isWhiteTime = true;
+              stillRunning = false;
+            } else {
+              System.err.println("Invalid movement, please try again");
+            }
+          }
+        break;
       }
-      stillRunning = false;
     }
   }
 
