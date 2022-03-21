@@ -154,7 +154,7 @@ public class Game {
     }
     System.out.print("\n\n");
 
-    for (int index = 0; index <= 7; index ++) {
+    for (int index = 7; index >= 0; index --) {
       System.out.print(index + " ");
     }
   }
@@ -260,9 +260,9 @@ public class Game {
             if(basePiece.isValidMovement(new Position(targetPieceRow, targetPieceColumn))) {
               basePiece.move(new Position(targetPieceRow, targetPieceColumn));
               board[targetPieceRow][targetPieceColumn] = basePiece;
+              board[basePieceRow][basePieceColumn] = null;
               System.out.println("OK");
-              isWhiteTime = true;
-              stillRunning = false;
+              isWhiteTime = false;
             } else {
               System.err.println("Invalid movement, please try again");
             }
