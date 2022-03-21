@@ -26,57 +26,65 @@ public class Game {
   private static Piece[][] populateGameBoard() {
     Piece[][] populatedGameBoard = new Piece[8][8];
 
+    // black
     String rookSymbol = "♜";
     String knightSymbol = "♞";
     String bishopSymbol = "♝";
     String kingSymbol = "♛";
     String queenSymbol = "♚";
     String pawnSymbol = "♟";
+    // white
+    String rookSymbolW = "♖";
+    String knightSymbolW = "♘";
+    String bishopSymbolW = "♗";
+    String kingSymbolW = "♕";
+    String queenSymbolW = "♔";
+    String pawnSymbolW = "♙";
 
     // Populate white side
     populatedGameBoard[0][0] =
-        new Rook(true, rookSymbol, new Position(0,0));
+            new Rook(true, rookSymbolW, new Position(0,0));
     populatedGameBoard[0][1] =
-        new Knight(true, knightSymbol, new Position(0, 1));
+            new Knight(true, knightSymbolW, new Position(0, 1));
     populatedGameBoard[0][2] =
-        new Bishop(true, bishopSymbol, new Position(0, 2));
+            new Bishop(true, bishopSymbolW, new Position(0, 2));
     populatedGameBoard[0][3] =
-        new King(true, kingSymbol, new Position(0, 3));
+            new King(true, kingSymbolW, new Position(0, 3));
     populatedGameBoard[0][4] =
-        new Queen(true, queenSymbol, new Position(0, 4));
+            new Queen(true, queenSymbolW, new Position(0, 4));
     populatedGameBoard[0][5] =
-        new Bishop(true, bishopSymbol, new Position(0, 5));
+            new Bishop(true, bishopSymbolW, new Position(0, 5));
     populatedGameBoard[0][6] =
-        new Knight(true, knightSymbol, new Position(0, 6));
+            new Knight(true, knightSymbolW, new Position(0, 6));
     populatedGameBoard[0][7] =
-        new Rook(true, pawnSymbol, new Position(0,7));
+            new Rook(true, rookSymbolW, new Position(0,7));
 
-    populatedGameBoard[1][0] = new Pawn(true, pawnSymbol, new Position(1, 0));
-    populatedGameBoard[1][1] = new Pawn(true, pawnSymbol, new Position(1, 1));
-    populatedGameBoard[1][2] = new Pawn(true, pawnSymbol, new Position(1, 2));
-    populatedGameBoard[1][3] = new Pawn(true, pawnSymbol, new Position(1, 3));
-    populatedGameBoard[1][4] = new Pawn(true, pawnSymbol, new Position(1, 4));
-    populatedGameBoard[1][5] = new Pawn(true, pawnSymbol, new Position(1, 5));
-    populatedGameBoard[1][6] = new Pawn(true, pawnSymbol, new Position(1, 6));
-    populatedGameBoard[1][7] = new Pawn(true, pawnSymbol, new Position(1, 7));
+    populatedGameBoard[1][0] = new Pawn(true, pawnSymbolW, new Position(1, 0));
+    populatedGameBoard[1][1] = new Pawn(true, pawnSymbolW, new Position(1, 1));
+    populatedGameBoard[1][2] = new Pawn(true, pawnSymbolW, new Position(1, 2));
+    populatedGameBoard[1][3] = new Pawn(true, pawnSymbolW, new Position(1, 3));
+    populatedGameBoard[1][4] = new Pawn(true, pawnSymbolW, new Position(1, 4));
+    populatedGameBoard[1][5] = new Pawn(true, pawnSymbolW, new Position(1, 5));
+    populatedGameBoard[1][6] = new Pawn(true, pawnSymbolW, new Position(1, 6));
+    populatedGameBoard[1][7] = new Pawn(true, pawnSymbolW, new Position(1, 7));
 
     // Populate black side
     populatedGameBoard[7][0] =
-        new Rook(false, rookSymbol, new Position(7,0));
+            new Rook(false, rookSymbol, new Position(7,0));
     populatedGameBoard[7][1] =
-        new Knight(false, knightSymbol, new Position(7, 1));
+            new Knight(false, knightSymbol, new Position(7, 1));
     populatedGameBoard[7][2] =
-        new Bishop(false, bishopSymbol, new Position(7, 2));
+            new Bishop(false, bishopSymbol, new Position(7, 2));
     populatedGameBoard[7][3] =
-        new King(false, kingSymbol, new Position(7, 3));
+            new King(false, kingSymbol, new Position(7, 3));
     populatedGameBoard[7][4] =
-        new Queen(false, queenSymbol, new Position(7, 4));
+            new Queen(false, queenSymbol, new Position(7, 4));
     populatedGameBoard[7][5] =
-        new Bishop(false, bishopSymbol, new Position(7, 5));
+            new Bishop(false, bishopSymbol, new Position(7, 5));
     populatedGameBoard[7][6] =
-        new Knight(false, knightSymbol, new Position(7, 6));
+            new Knight(false, knightSymbol, new Position(7, 6));
     populatedGameBoard[7][7] =
-        new Rook(false, rookSymbol, new Position(7,7));
+            new Rook(false, rookSymbol, new Position(7,7));
 
     populatedGameBoard[6][0] = new Pawn(false, pawnSymbol, new Position(6, 0));
     populatedGameBoard[6][1] = new Pawn(false, pawnSymbol,new Position(6, 1));
@@ -89,6 +97,7 @@ public class Game {
 
     return populatedGameBoard;
   }
+
 
   private static String manageMenuOptions(boolean isWhiteTime) {
     String userInputOption;
@@ -126,6 +135,7 @@ public class Game {
       return false;
     }
   }
+
 
   private static boolean isSquareOrUci(String userInputOption) {
     boolean isSquareOrUci = true;
@@ -258,12 +268,7 @@ public class Game {
 
         default:
           if (userOption.length() <= 2) {
-            int requestedRow = Integer.parseInt(userOption.substring(0, userOption.length() / 2));
-            int requestedColumn = Integer.parseInt(userOption.substring(userOption.length() / 2));
-            Piece pieceInSquare = board[requestedRow][requestedColumn];
-
-            System.out.println("Possible moves for " + userOption + ":");
-            System.out.println(pieceInSquare.showAvailableMovements(pieceInSquare.position));
+            displayPossibleMovements(userOption);
           } else {
             String basePieceSquare = userOption.substring(0, userOption.length() / 2);
             int basePieceRow =
@@ -291,58 +296,6 @@ public class Game {
         break;
       }
     }
-  }
-
-  public void board(){
-    // 2D array for the board
-    String [][] board = new String[8][8];
-    // Black Pieces
-    String rookB = "♜";
-    String knightB = "♞";
-    String bishopB = "♝";
-    String kingB = "♛";
-    String queenB = "♚";
-    board[0][0] = rookB;
-    board[0][1] = knightB;
-    board[0][2] = bishopB;
-    board[0][3] = kingB;
-    board[0][4] = queenB;
-    board[0][5] = bishopB;
-    board[0][6] = knightB;
-    board[0][7] = rookB;
-
-    for (int i = 0; i < 8; i++){
-      String pawnB = "♟";
-      board[1][i] = pawnB;
-    }
-    // White Pieces
-    for (int j = 0; j < 8; j++){
-      String pawnW = "♙";
-      board[6][j] = pawnW;
-    }
-
-    String rookW = "♖";
-    String knightW = "♘";
-    String bishopW = "♗";
-    String kingW = "♕";
-    String queenW = "♔";
-    board[7][0] = rookW;
-    board[7][1] = knightW;
-    board[7][2] = bishopW;
-    board[7][3] = kingW;
-    board[7][4] = queenW;
-    board[7][5] = bishopW;
-    board[7][6] = knightW;
-    board[7][7] = rookW;
-
-    // Middle of the board
-    for (int k = 2; k <= 5; k++){
-      for (int l = 0; l < 8; l++){
-        board[k][l] = "*";
-      }
-    }
-
-    System.out.println(Arrays.deepToString(board));
   }
 
 }
