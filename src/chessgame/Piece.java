@@ -56,14 +56,18 @@ public abstract class Piece {
         }
     }
 
+    public boolean isSamePosition(Position position){
+        return getPosition().getRow() == position.getRow() && getPosition().getColumn() == position.getColumn();
+    }
+
     public abstract List<String> showAvailableMovements(Position position);
 
     @Override
     public String toString() {
         return "Piece{" +
-            "isWhite=" + isWhite +
-            ", position=" + position +
-            '}';
+                "isWhite=" + isWhite +
+                ", position=" + position +
+                '}';
     }
 
     @Override
