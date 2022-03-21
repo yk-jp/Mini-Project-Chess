@@ -284,8 +284,6 @@ public class Game {
               board[basePieceRow][basePieceColumn] = null;
               System.out.println("OK");
               isWhiteTime = !isWhiteTime;
-
-              // implement win here
             } else {
               System.err.println("Invalid movement, please try again");
             }
