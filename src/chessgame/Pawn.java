@@ -1,9 +1,11 @@
 package chessgame;
 
+import java.util.List;
+
 public class Pawn extends Piece {
 
-  public Pawn(boolean isWhite, Position position) {
-    super(isWhite, position);
+  public Pawn(boolean isWhite, String pieceSymbol, Position position) {
+    super(isWhite, pieceSymbol, position);
   }
 
   @Override
@@ -20,7 +22,7 @@ public class Pawn extends Piece {
   }
 
   @Override
-  public void showAvailableMovements(Position position) {
+  public List<String> showAvailableMovements(Position position) {
     String availableMove;
 
     if(super.position.getColumn() < 7 && super.position.getRow() < 7) {
@@ -42,9 +44,7 @@ public class Pawn extends Piece {
           (super.position.getRow() + 1) + String.valueOf(super.position.getColumn());
       super.availableMovements.add(availableMove);
     }
-
-    System.out.println(String.format("Possible moves for %d%d:\n",
-        position.getRow(), position.getColumn()) + super.availableMovements);
+    return super.availableMovements;
   }
 
   @Override
