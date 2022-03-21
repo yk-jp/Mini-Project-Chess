@@ -47,7 +47,7 @@ public abstract class Piece {
     }
 
     public boolean isValidMovement(Position position) {
-        if(position.getRow()>0 && position.getColumn()>0
+        if(position.getRow()>=0 && position.getColumn()>= 0
                 && position.getRow()<8 && position.getColumn()<8){
             return true;
         }
